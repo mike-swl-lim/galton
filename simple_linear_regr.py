@@ -9,7 +9,20 @@ class SimpleLinearRegression:
         self.losses = [] # A list to hold the history of the calculated losses
         self.W, self.b = None, None # the slope and the intercept of the model
 
-    def __loss(self, y, y_hat):
+    def __calculate_loss(y, y_hat, loss_metric = "RMSE"):
+        loss = None 
+        if loss_metric == "RMSE":
+            loss = ""
+        
+        if loss_metric == "MAE":
+            loss = ""
+
+        if loss == None:
+            raise Exception("Loss calculation failed!")
+        
+        return loss
+
+    def __loss(self, y, y_hat, loss_metric = "RMSE"):
         """
 
         :param y: the actual output on the training set
@@ -19,7 +32,12 @@ class SimpleLinearRegression:
 
         """
         #ToDO calculate the loss. use the sum of squared error formula for simplicity
-        loss = None
+        
+        loss = self.__calculate_loss(
+            y = y,
+            y_hat = y_hat,
+            loss_metric = loss_metric 
+        )
 
         self.losses.append(loss)
         return loss
