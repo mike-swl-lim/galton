@@ -1,6 +1,10 @@
 import numpy as np
-from simple_linear_regr_utils import generate_data, evaluate
+from .simple_linear_regr_utils import generate_data, evaluate
 
+
+# def _error(actual: np.ndarray, predicted: np.ndarray):
+#     """ Simple error """
+#     return actual - predicted
 
 class SimpleLinearRegression:
     def __init__(self, iterations=15000, lr=0.1):
@@ -9,22 +13,30 @@ class SimpleLinearRegression:
         self.losses = [] # A list to hold the history of the calculated losses
         self.W, self.b = None, None # the slope and the intercept of the model
 
-    def __calculate_loss(y, y_hat, loss_metric = "RMSE"):
-        loss = None 
-        if loss_metric == "RMSE":
-            difference = np.subtract(y, y_hat)
-            mse = np.square(difference).mean()
-            loss = np.sqrt(mse)
-        
-        if loss_metric == "MAE":
-            loss = ""
+    def __calculate_rmse(self, difference):
+        mse = np.square(difference).mean()
+        rmse = np.sqrt(mse)
+        return rmse
 
-        if loss == None:
-            raise Exception("Loss calculation failed!")
+    def __calculate_mae(self, difference):
+        mae = np.mean(np.abs(difference))
+        return mae
+
+    def __calculate_loss(self, y: np.ndarray, y_hat: np.ndarray, loss_metric: str = "RMSE"):
+        loss = None 
+        difference = np.subtract(y, y_hat)
+
+        try: 
+            if loss_metric == "RMSE":
+                loss = self.__calculate_rmse(difference)
+            if loss_metric == "MAE":
+                loss = self.__calculate_mae(difference)
+        except Exception as e:
+            raise e
         
         return loss
 
-    def __loss(self, y, y_hat, loss_metric = "RMSE"):
+    def __loss(self, y: np.ndarray, y_hat: np.ndarray, loss_metric: str = "RMSE") -> np.float64:
         """
 
         :param y: the actual output on the training set
@@ -96,7 +108,7 @@ class SimpleLinearRegression:
             y_hat: the predicted output
         """
         #ToDO calculate the predicted output y_hat. remember the function of a line is defined as y = WX + b
-        y_hat = None
+        y_hat = np.multiply(self.W, X) + self.b
         return y_hat
 
 
