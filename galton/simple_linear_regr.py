@@ -1,7 +1,5 @@
 import numpy as np
 from .simple_linear_regr_utils import generate_data, evaluate
-from sklearn.metrics import mean_squared_error
-from sklearn.linear_model import LinearRegression
 
 class SimpleLinearRegression:
     def __init__(self, iterations=15000, lr=0.1):
@@ -33,8 +31,7 @@ class SimpleLinearRegression:
             if loss_metric == "MAE":
                 loss = self.__calculate_mae(difference)
             if loss_metric == "MSE":
-                # loss = self.__calculate_mse(difference)
-                loss = mean_squared_error(y, y_hat)
+                loss = self.__calculate_mse(difference)
         except Exception as e:
             print(e)
         
@@ -114,8 +111,6 @@ class SimpleLinearRegression:
             y_hat: the predicted output
         """
         #ToDO calculate the predicted output y_hat. remember the function of a line is defined as y = WX + b
-        # y_hat = X.dot(self.W) + self.b
-        # y_hat = self.W * X + self.b
         y_hat = X.dot(self.W) + self.b
         return y_hat
 
