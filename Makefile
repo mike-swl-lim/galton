@@ -14,3 +14,6 @@ push-scorer-image:
 deploy-cf:
 	aws cloudformation deploy --template-file ./cloudformation/galton.cf.yaml --stack-name galton-dev --capabilities CAPABILITY_NAMED_IAM --no-fail-on-empty-changeset
 
+run-local: # not working
+	sam local invoke -t ./cloudformation/galton.cf.yaml \
+		--event ./tests/data/test_lambda_single_event.json 
