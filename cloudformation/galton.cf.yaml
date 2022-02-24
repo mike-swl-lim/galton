@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Building an ml system
+
+  BatchScorerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Gets a JSON payload and runs the batch scoring function
+      PackageType: Image
+      FunctionName: batch-scoring-function
+      ImageConfig:
+        Command: ["lambda_function.batch_lambda_handler"]
+      ImageUri: scoring_container_image
+      MemorySize: 2048
+      Timeout: 29
+
+# ECR
+# 2 lambda functions
+# api gateway, api key
+
