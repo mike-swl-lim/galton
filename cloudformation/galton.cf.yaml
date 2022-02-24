@@ -12,7 +12,7 @@ Resources:
       FunctionName: batch-scoring-function
       ImageConfig:
         Command: ["scoring_function.lambda_handler"]
-      ImageUri: 744607448056.dkr.ecr.ap-southeast-2.amazonaws.com/scoring_container_image
+      ImageUri: 744607448056.dkr.ecr.ap-southeast-2.amazonaws.com/scoring_container_image:latest
       MemorySize: 2048
       Timeout: 29
 
