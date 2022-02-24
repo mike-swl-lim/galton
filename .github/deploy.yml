@@ -2,7 +2,7 @@ on:
   push:
     branches:
     - main
-  workflow_dispath:
+  work  flow_dispath:
 
 jobs:
   build-and-deploy-scoring-api:
@@ -22,3 +22,21 @@ jobs:
           role-to-assume: cicd-deploy-role
           role-duration-seconds: 1800
           role-session-name: cicd-deploy-aws-session
+
+      - name: install-python-requirements
+        run: pip install -r requirements.txt
+      
+      - name: run-unit-tests
+        run: pytest
+
+      - name: build-image
+        run: make build
+      
+      - name: deploy-scorer-image-repo
+        run: make deploy-image-repo
+
+      - name: push-image-to-aws-ECR
+        run: make push-scorer-image
+
+      - name: deploy-lambda-function
+        run: make deploy-cf
