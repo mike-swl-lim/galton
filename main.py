@@ -1,6 +1,7 @@
 from flask import Flask, request
 from galton.simple_linear_regr import load_model
 import numpy as np
+import os
 
 app = Flask(__name__)
 
@@ -26,3 +27,7 @@ def score_stream():
     return {
         "stream_prediction": pred.tolist()[0]
     }
+
+os.system(
+    "export FLASK_APP=main && flask run"
+)
