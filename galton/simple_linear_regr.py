@@ -2,7 +2,7 @@ import numpy as np
 from .simple_linear_regr_utils import generate_data, evaluate
 
 class SimpleLinearRegression:
-    def __init__(self, iterations=15000, lr=0.1):
+    def __init__(self, iterations=2000, lr=0.002):
         self.iterations = iterations # number of iterations the fit method will be called
         self.learning_rate = lr # The learning rate
         self.losses = [] # A list to hold the history of the calculated losses
