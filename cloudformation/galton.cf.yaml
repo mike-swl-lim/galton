@@ -4,7 +4,7 @@ Description: Building an ml system - lambda deployment
 
 Resources:
 
-    CICDUser:
+  CICDUser:
     Type: AWS::IAM::User
     Properties:
       UserName: cicd.user
