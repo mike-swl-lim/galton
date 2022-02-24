@@ -5,14 +5,15 @@ Sir Francis Galton was an English Victorian polymath, and the grand daddy of "re
 It is in his honour that this challenge has been completed.
 
 # Model 
+```
+iterations = 2000
+learning_rate = 0.002
+```
 ## Performance
-
-
-
-# Architecture
 
 ![image](https://user-images.githubusercontent.com/29474816/155529999-6362034a-ff17-4f64-9d4a-20299dc542a1.png)
 
+# Architecture
 
 # Deployment
 ```
