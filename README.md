@@ -17,11 +17,17 @@ learning_rate = 0.002
 ![image](https://user-images.githubusercontent.com/29474816/155529999-6362034a-ff17-4f64-9d4a-20299dc542a1.png)
 
 # Architecture
+* A pretty simple architecture
+* Dont need training in cloud for this use case as model is super small and simple, did not feel the need to upload artifact to object storage
+* Model is saved as part of container that is then pushed for lambda to use
+* ApiGateway makes it super simple to configure load balance and rate limited based on throughput and traffic
 
 ![Untitled Diagram drawio](https://user-images.githubusercontent.com/29474816/155542063-fbede8aa-6968-41f7-8ef7-5e3b844cd54f.png)
 
 
 # CICD
+* Uses github actions (yay free tier)
+* Broad flow is setup, test, lint, deploy to AWS
 
 # Deployment
 ```
