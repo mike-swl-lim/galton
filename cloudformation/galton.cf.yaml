@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Building an ml system - lambda deployment
+
+Resources:
+
+  CICDUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: cicd.user
+      Policies:
+        - PolicyName: cicd-role-policy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Sid: 'AllowAssumeCiCdRole'
+                Effect: Allow
+                Action: 
+                  - sts:TagSession
+                  - sts:AssumeRole
+                Resource: '*'
+
+  TempCICDRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub 'cicd-deploy-role'
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !GetAtt CICDUser.Arn 
+            Action:
+              - sts:AssumeRole
+              - sts:TagSession
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+      Policies:
+        - PolicyName: 'cicd-deny-policy'
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Sid: CicdDenyPermissions
+                Effect: Deny
+                Action:
+                  - ec2:CreateCustomerGateway
+                Resource: '*'
+
+  BatchScorerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Gets a JSON payload and runs the batch scoring function
+      PackageType: Image
+      FunctionName: batch-scoring-function
+      ImageConfig:
+        Command: ["scoring_function.lambda_handler"]
+      ImageUri: 744607448056.dkr.ecr.ap-southeast-2.amazonaws.com/scoring_container_image:latest
+      MemorySize: 2048
+      Timeout: 29
+
+  LambdaApiGatewayPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: batch-scoring-function
+      Principal: apigateway.amazonaws.com
+
+
+# ECR
+# 2 lambda functions
+# api gateway, api key
+

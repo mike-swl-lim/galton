@@ -1,0 +1,58 @@
+on:
+  push:
+    branches:
+    - main
+  work  flow_dispath:
+
+jobs:
+  build-and-deploy-scoring-api:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.10]
+
+    steps:
+
+      - name: checkout-repo
+        uses: actions/checkout@v2
+
+      - name: setup-python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{matrix.python-version}}
+      
+      - name: install-dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest flake8
+          pip install -r requirements.txt
+      
+      - name: unit-test
+        run: pytest
+      
+      - name: run-linter
+        run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics 
+
+      - name: configure-aws-creds-tools
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_SECRET_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-2
+          role-to-assume: cicd-deploy-role
+          role-duration-seconds: 1800
+          role-session-name: cicd-deploy-aws-session
+
+ 
+
+      - name: build-image
+        run: make build
+      
+      - name: deploy-scorer-image-repo
+        run: make deploy-image-repo
+
+      - name: push-image-to-aws-ECR
+        run: make push-scorer-image
+
+      - name: deploy-lambda-function
+        run: make deploy-cf

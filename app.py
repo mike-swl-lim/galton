@@ -27,7 +27,3 @@ def score_stream():
     return {
         "stream_prediction": pred.tolist()[0]
     }
-
-os.system(
-    "export FLASK_APP=main && flask run"
-)

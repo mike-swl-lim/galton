@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Building an ml system
+
+Resources:
+  ScoringContainerImage:
+    Type: AWS::ECR::Repository
+    Properties: 
+      RepositoryName: scoring_container_image
+      RepositoryPolicyText:
+        Version: "2012-10-17"
+        Statement: 
+          - Sid: AllowPushPull
+            Effect: Allow
+            Principal: '*'
+            Action: 
+              - ecr:GetDownloadUrlForLayer
+              - ecr:BatchGetImage
+              - ecr:BatchCheckLayerAvailability
+              - ecr:DescribeImages
+              - ecr:DescribeRepositories
+              - ecr:PutImage
+              - ecr:InitiateLayerUpload
+              - ecr:UploadLayerPart
+              - ecr:CompleteLayerUpload
