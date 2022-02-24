@@ -109,3 +109,4 @@ The above should return:
 * Unit tests for every function for 100% coverage
 * Run tests via container in pipeline
 * Deploy package to some sort of artifcat repository and pull from there
+* Monitoring has not been considered for this implementation, but I would default to something simple like Amazon CloudWatch. If I'm running big clusters and lots of machines something like Grafana would be ideal.
