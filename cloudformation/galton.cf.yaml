@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: Building an ml system
+Description: Building an ml system - lambda deployment
 
 Resources:
 
@@ -12,7 +12,7 @@ Resources:
       FunctionName: batch-scoring-function
       ImageConfig:
         Command: ["lambda_function.batch_lambda_handler"]
-      ImageUri: scoring_container_image
+      ImageUri: 744607448056.dkr.ecr.ap-southeast-2.amazonaws.com/scoring_container_image
       MemorySize: 2048
       Timeout: 29
 
