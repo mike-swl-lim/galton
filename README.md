@@ -81,3 +81,4 @@ The above should return:
     * Encryption 
 * Unit tests for every function for 100% coverage
 * Run tests via container in pipeline
+* Deploy package to some sort of artifcat repository and pull from there
