@@ -1,4 +1,5 @@
 import numpy as np
+import pickle
 from .simple_linear_regr_utils import generate_data, evaluate
 
 class SimpleLinearRegression:
@@ -119,4 +120,16 @@ def linear_regression_pipeline():
     model = SimpleLinearRegression()
     model.fit(X_train,y_train)
     predicted = model.predict(X_test)
-    evaluate(model, X_test, y_test, predicted)
+    evaluate(model, X_test, y_test, predicted, show_plot=False)
+    return model
+
+
+def save_model(model: SimpleLinearRegression, save_path: str):
+    with open(save_path, 'wb') as file:
+        pickle.dump(model, file, pickle.HIGHEST_PROTOCOL)
+    print("Model saved at : ", save_path)    
+
+def load_model(save_path: str) -> SimpleLinearRegression:
+    with open(save_path, 'rb') as input:
+        model = pickle.load(input)
+    return model

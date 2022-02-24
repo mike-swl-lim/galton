@@ -1,9 +1,7 @@
 import numpy as np
-import pickle
 from sklearn.datasets import load_diabetes
 from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
-from .simple_linear_regr import SimpleLinearRegression
 
 def generate_data():
     """
@@ -34,7 +32,7 @@ def generate_data():
     return diabetes_X_train, diabetes_y_train, diabetes_X_test, diabetes_y_test
 
 
-def evaluate(model, X, y, y_predicted):
+def evaluate(model, X, y, y_predicted, show_plot = True):
     """ Calculates and prints evaluation metrics. """
     # The coefficients
     print(f"Slope: {model.W}; Intercept: {model.b}")
@@ -52,19 +50,11 @@ def evaluate(model, X, y, y_predicted):
     plt.xticks(())
     plt.yticks(())
 
-    plt.show()
+    if show_plot == True:
+        plt.show()
 
     if r2 >= 0.4:
         print("****** Success ******")
     else:
         print("****** Failed ******")
 
-
-def save_model(model: SimpleLinearRegression, save_path: str):
-    with open(save_path, 'wb') as output:
-        pickle.dump(model, output, pickle.HIGHEST_PROTOCOL)    
-
-def load_model(save_path: str) -> SimpleLinearRegression:
-    with open(save_path, 'rb') as input:
-        model = pickle.load(save_path)
-    return model
