@@ -66,8 +66,6 @@ class SimpleLinearRegression:
         weights = np.random.normal(size=X.shape[1] + 1)
         self.W = weights[:X.shape[1]].reshape(-1, X.shape[1])
         self.b = weights[-1]
-        print(self.W.shape)
-        print(self.b.shape)
 
     def __sgd(self, X, y, y_hat):
         """
