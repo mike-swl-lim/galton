@@ -68,3 +68,11 @@ The above should return:
 ```
 {"predictions": [9530.899058493378, 18908.879046675287]}
 ```
+
+# If I had time
+* Implement cloudformation for ApiGateway properly instead of going the quick and dirty console method
+* Implement security for this Api
+    * JWT
+    * Authentication Key
+    * Key & Secret Rotation
+    * Encryption 
