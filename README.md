@@ -18,6 +18,9 @@ learning_rate = 0.002
 
 # Architecture
 
+
+# CICD
+
 # Deployment
 ```
 make deploy-image-repo && \
@@ -76,3 +79,5 @@ The above should return:
     * Authentication Key
     * Key & Secret Rotation
     * Encryption 
+* Unit tests for every function for 100% coverage
+* Run tests via container in pipeline
