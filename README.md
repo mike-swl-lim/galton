@@ -18,6 +18,8 @@ learning_rate = 0.002
 
 # Architecture
 
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/29474816/155542063-fbede8aa-6968-41f7-8ef7-5e3b844cd54f.png)
+
 
 # CICD
 
