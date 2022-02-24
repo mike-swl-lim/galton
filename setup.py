@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name = "galton",
     version = "0.0.1",
-    author = "Michael Lim"
+    author = "Michael Lim",
     author_email = "mikelimcontact1000@gmail.com",
     description = "Machine learning engineer challenge for endeavour group",
     url = "https://github.com/mike-swl-lim/ml-engineering-challenge",
