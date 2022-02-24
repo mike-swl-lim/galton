@@ -1,7 +1,9 @@
 import numpy as np
+import pickle
 from sklearn.datasets import load_diabetes
 from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
+from .simple_linear_regr import SimpleLinearRegression
 
 def generate_data():
     """
@@ -56,3 +58,13 @@ def evaluate(model, X, y, y_predicted):
         print("****** Success ******")
     else:
         print("****** Failed ******")
+
+
+def save_model(model: SimpleLinearRegression, save_path: str):
+    with open(save_path, 'wb') as output:
+        pickle.dump(model, output, pickle.HIGHEST_PROTOCOL)    
+
+def load_model(save_path: str) -> SimpleLinearRegression:
+    with open(save_path, 'rb') as input:
+        model = pickle.load(save_path)
+    return model
