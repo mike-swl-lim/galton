@@ -4,6 +4,48 @@ Description: Building an ml system - lambda deployment
 
 Resources:
 
+    CICDUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: cicd.user
+      Policies:
+        - PolicyName: cicd-role-policy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Sid: 'AllowAssumeCiCdRole'
+                Effect: Allow
+                Action: 
+                  - sts:TagSession
+                  - sts:AssumeRole
+                Resource: '*'
+
+  TempCICDRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub 'cicd-deploy-role'
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !GetAtt CICDUser.Arn 
+            Action:
+              - sts:AssumeRole
+              - sts:TagSession
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+      Policies:
+        - PolicyName: 'cicd-deny-policy'
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Sid: CicdDenyPermissions
+                Effect: Deny
+                Action:
+                  - ec2:CreateCustomerGateway
+                Resource: '*'
+
   BatchScorerFunction:
     Type: AWS::Serverless::Function
     Properties:
