@@ -73,6 +73,25 @@ The above should return:
 ```
 {"predictions": [9530.899058493378, 18908.879046675287]}
 ```
+# Enterprise machine learning system
+* Feature Store - to access your engineered features that come from processing your source data
+    * batch
+    * "online"
+* Training  - a module that provides an interface to easily train models via the cloud
+    * should support wide variety of ML libraries and tooling
+* Model manager - a module that provides utilities to manage collections of models that have been trained
+* Automated inference - a pipeline that provides for the automated deployment of both batch and online scoring use cases with minimal boilerplate
+* Configuration  - at scale, having a separate module to compare and build configuration with their own versioning is well worth the effort to ensure configs are transparent and easily accessible
+
+# Checklist
+- [x] Take the code and upload to git repo
+- [x] Provide high level overview of systems designs
+- [x] Create simple linear regression model
+- [x] Update main.py to create invokable http api (renamed to app.py)
+- [x] Package your code into a library
+- [x] Package your code into a container and deploy to container registry
+- [x] Create a CICD pipeline using the technology of your choice to deploy your code to production
+- [x] Document what components an enterprise machine learning system should have
 
 # If I had time
 * Implement cloudformation for ApiGateway properly instead of going the quick and dirty console method
