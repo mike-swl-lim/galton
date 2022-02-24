@@ -5,6 +5,9 @@ Sir Francis Galton was an English Victorian polymath, and the grand daddy of "re
 It is in his honour that this challenge has been completed.
 
 # Model 
+The algorithm here is a simple linear regression that has been optimised using gradient descent.
+
+Note the gradient descent implemented here is not technically "stochastic" as a shuffled sub sample of the dataset is not being used to update weights.
 ```
 iterations = 2000
 learning_rate = 0.002
