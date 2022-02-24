@@ -58,6 +58,14 @@ Resources:
       MemorySize: 2048
       Timeout: 29
 
+  LambdaApiGatewayPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: batch-scoring-function
+      Principal: apigateway.amazonaws.com
+
+
 # ECR
 # 2 lambda functions
 # api gateway, api key
