@@ -5,6 +5,6 @@ RUN python3.8 -m pip install -r requirements.txt
 RUN python3.8 -m pip install -e .
 RUN python scripts/train.py
 
-COPY lambda_function/scoring_function/ .
+COPY lambda_function/scoring_function.py /var/task/
 
 CMD ["scoring_function.lambda_handler"]
