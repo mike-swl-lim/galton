@@ -11,7 +11,7 @@ Resources:
       PackageType: Image
       FunctionName: batch-scoring-function
       ImageConfig:
-        Command: ["lambda_function.batch_lambda_handler"]
+        Command: ["scoring_function.lambda_handler"]
       ImageUri: 744607448056.dkr.ecr.ap-southeast-2.amazonaws.com/scoring_container_image
       MemorySize: 2048
       Timeout: 29
